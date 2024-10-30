@@ -8,6 +8,7 @@ import edu.miu.cs.cs489.lab1b.model.Employee;
 import edu.miu.cs.cs489.lab1b.model.PensionPlan;
 import edu.miu.cs.cs489.lab1b.service.EmployeeService;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,10 +17,10 @@ public class App {
 
     public static void main(String[] args) throws JsonProcessingException {
         List<Employee> employees = new ArrayList<>();
-        employees.add(new Employee(1, "Daniel", "Agar", new Date(118, 0, 17), 105945.50, new PensionPlan("EX1089", new Date(123, 0, 17), 100.00)));
-        employees.add(new Employee(2, "Bernard", "Shaw", new Date(119, 3, 3), 197750.00, null));
-        employees.add(new Employee(3, "Carly", "Agar", new Date(114, 4, 16), 842000.75, new PensionPlan("SM2307", new Date(119, 10, 4), 1555.50)));
-        employees.add(new Employee(4, "Wesley", "Schneider", new Date(119, 8, 2), 74500.00, null));
+        employees.add(new Employee(1, "Daniel", "Agar", LocalDate.of(20118, 1, 17), 105945.50, new PensionPlan("EX1089", LocalDate.of(2023, 1, 17), 100.00)));
+        employees.add(new Employee(2, "Bernard", "Shaw", LocalDate.of(2019, 4, 3), 197750.00, null));
+        employees.add(new Employee(3, "Carly", "Agar", LocalDate.of(2014, 5, 16), 842000.75, new PensionPlan("SM2307", LocalDate.of(2019, 11, 4), 1555.50)));
+        employees.add(new Employee(4, "Wesley", "Schneider", LocalDate.of(2019, 9, 2), 74500.00, null));
 
         EmployeeService service = new EmployeeService(employees);
 

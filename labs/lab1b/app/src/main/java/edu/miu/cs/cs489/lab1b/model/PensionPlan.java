@@ -1,13 +1,13 @@
 package edu.miu.cs.cs489.lab1b.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class PensionPlan {
     private String planReferenceNumber;
-    private Date enrollmentDate;
+    private LocalDate enrollmentDate;
     private double monthlyContribution;
 
-    public PensionPlan(String planReferenceNumber, Date enrollmentDate, double monthlyContribution) {
+    public PensionPlan(String planReferenceNumber, LocalDate enrollmentDate, double monthlyContribution) {
         this.planReferenceNumber = planReferenceNumber;
         this.enrollmentDate = enrollmentDate;
         this.monthlyContribution = monthlyContribution;
@@ -22,11 +22,11 @@ public class PensionPlan {
         this.planReferenceNumber = planReferenceNumber;
     }
 
-    public Date getEnrollmentDate() {
+    public LocalDate getEnrollmentDate() {
         return enrollmentDate;
     }
 
-    public void setEnrollmentDate(Date enrollmentDate) {
+    public void setEnrollmentDate(LocalDate enrollmentDate) {
         this.enrollmentDate = enrollmentDate;
     }
 

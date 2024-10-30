@@ -18,6 +18,7 @@ repositories {
 
 dependencies {
     implementation(libs.jackson)
+    implementation(libs.jacksonJsr310)
     // Use JUnit test framework.
     testImplementation(libs.junit)
 

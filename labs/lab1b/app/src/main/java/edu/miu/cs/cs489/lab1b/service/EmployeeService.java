@@ -4,8 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.util.StdDateFormat;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import edu.miu.cs.cs489.lab1b.model.Employee;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -17,6 +20,8 @@ public class EmployeeService {
         mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         mapper.setDateFormat(new StdDateFormat());
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         this.employees = employees;
     }
 
@@ -29,17 +34,11 @@ public class EmployeeService {
     }
 
     public String getMonthlyUpcomingEnrolleesReport() throws JsonProcessingException {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MONTH, 1);
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-        Date firstOfNextMonth = calendar.getTime();
-
-        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-        Date lastOfNextMonth = calendar.getTime();
+        LocalDate nextMonthStart = LocalDate.now().plusMonths(1).withDayOfMonth(1);
+        LocalDate nextMonthEnd = nextMonthStart.withDayOfMonth(nextMonthStart.lengthOfMonth());
 
         List<Employee> upcomingEnrollees = employees.stream()
-                .filter(employee -> employee.getPensionPlan() == null || !employee.getEmploymentDate().before(firstOfNextMonth)
-                        && !employee.getEmploymentDate().after(lastOfNextMonth))
+                .filter(employee -> employee.getPensionPlan() == null && ChronoUnit.YEARS.between(employee.getEmploymentDate(), nextMonthEnd) >= 5)
                 .sorted(Comparator.comparing(Employee::getEmploymentDate))
                 .collect(Collectors.toList());
 

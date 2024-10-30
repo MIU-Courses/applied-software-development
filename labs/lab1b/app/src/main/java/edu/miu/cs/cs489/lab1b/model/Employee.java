@@ -1,15 +1,15 @@
 package edu.miu.cs.cs489.lab1b.model;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Employee {
     private long employeeId;
     private String firstName;
     private String lastName;
-    private Date employmentDate;
+    private LocalDate employmentDate;
     private double yearlySalary;
     private PensionPlan pensionPlan;
 
-    public Employee(long employeeId, String firstName, String lastName, Date employmentDate, double yearlySalary, PensionPlan pensionPlan) {
+    public Employee(long employeeId, String firstName, String lastName, LocalDate employmentDate, double yearlySalary, PensionPlan pensionPlan) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,11 +42,11 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public Date getEmploymentDate() {
+    public LocalDate getEmploymentDate() {
         return employmentDate;
     }
 
-    public void setEmploymentDate(Date employmentDate) {
+    public void setEmploymentDate(LocalDate employmentDate) {
         this.employmentDate = employmentDate;
     }
 
